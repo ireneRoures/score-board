@@ -1,5 +1,11 @@
+import { Game } from "../model/game";
+
 export class GameService {
-    getGames() {
+    get() {
         return [];
     }
+    add(localTeam: string, awayTeam: string) {
+        return new Game(localTeam, awayTeam)
+    }
+
 }

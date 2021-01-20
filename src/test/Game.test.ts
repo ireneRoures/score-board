@@ -1,6 +1,11 @@
-import { exec } from "child_process";
-import { existsSync } from "fs";
+import { GameService } from "../services/GameService";
 
-test('first test', () => {
-    expect(true).toBe(true);
+test('game service', () => {
+    const gameService = new GameService();
+})
+
+test('get list of games', () => {
+    const gameService = new GameService();
+    const games = gameService.getGames()
+    expect(games.length).toBe(0);
 })

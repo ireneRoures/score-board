@@ -21,3 +21,9 @@ test('create game', () => {
     expect(game.localScore).toBe(0)
     expect(game.awayScore).toBe(0)
 })
+
+test('get a list of one or more games', () => {
+    const gameService = new GameService()
+    gameService.add('local team', 'away team')
+    expect(gameService.get.length).toBe(1)
+})

@@ -25,5 +25,12 @@ test('create game', () => {
 test('get a list of one or more games', () => {
     const gameService = new GameService()
     gameService.add('local team', 'away team')
-    expect(gameService.get.length).toBe(1)
+    expect(gameService.get().length).toBe(1)
+})
+
+test('finish a game', () => {
+    const gameService = new GameService()
+    const gameId = gameService.add('local team', 'away team')
+    gameService.finish(gameId.id)
+    expect(gameService.get().length).toBe(0)
 })

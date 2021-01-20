@@ -13,7 +13,12 @@ export class GameService {
     }
 
     add(localTeam: string, awayTeam: string) {
-        return new Game(localTeam, awayTeam)
+        const newGame = new Game(localTeam, awayTeam)
+        this.games.push(newGame)
+        return newGame
     }
 
+    finish(gameId: number) {
+        this.games = this.games.filter((game: Game) => game.id != gameId)
+    }
 }

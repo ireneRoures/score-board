@@ -14,4 +14,9 @@ export class Game {
         this.localScore = 0
         this.awayScore = 0
     }
+
+    setScore(localScore: number, awayScore: number) {
+        this.localScore = localScore
+        this.awayScore = awayScore
+    }
 }

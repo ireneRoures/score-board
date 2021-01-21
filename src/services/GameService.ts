@@ -1,29 +1,30 @@
 import { Game } from "../model/game";
 
+let games: Game[]
 export class GameService {
 
-    games: Game[]
-
     constructor() {
-        this.games = []
+        if(!games) {
+            games = []
+        }
     }
 
     get() {
-        return this.games
+        return games
     }
 
     add(localTeam: string, awayTeam: string) {
         const newGame = new Game(localTeam, awayTeam)
-        this.games.push(newGame)
+        games.push(newGame)
         return newGame
     }
 
     finish(gameId: number) {
-        this.games = this.games.filter((game: Game) => game.id != gameId)
+        games = games.filter((game: Game) => game.id != gameId)
     }
 
     setScore(gameId: number, localScore: number, awayScore: number): Game {
-        const game = this.games.filter((game: Game) => game.id === gameId)
+        const game = games.filter((game: Game) => game.id === gameId)
         
         try {
             game[0].setScore(localScore, awayScore)
@@ -31,5 +32,9 @@ export class GameService {
         } catch (error) {
             throw new Error('Not found')
         }
+    }
+
+    clean() {
+        games = []
     }
 }

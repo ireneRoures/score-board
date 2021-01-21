@@ -37,4 +37,8 @@ export class GameService {
     clean() {
         games = []
     }
+
+    summary() {
+        return games.sort((game1: Game, game2: Game) => game1.getTotalScore() - game2.getTotalScore() < 0 ? 1 : -1)
+    }
 }

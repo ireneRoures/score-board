@@ -1,19 +1,38 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react'
-import { UserListComponent } from '../../components/UserListComponent'
+import { GameListComponent } from '../../components/GameListComponent'
 import { GameService } from '../../services/GameService';
 
-test('render game list: without games', () => {
-    render(<UserListComponent />)
-    expect(screen.getByRole('alert')).toHaveTextContent(/There aren't games right now/i)
-})
-
-test('render game list: with games', () => {
+beforeEach(() => {
     const gameService = new GameService()
     const localTeam = 'Munich'
     const awayTeam = 'London'
     gameService.add(localTeam, awayTeam)
+})
+afterEach(() => {
+    const gameService = new GameService()
+    gameService.clean()
+})
 
-    render(<UserListComponent />)
-    expect(screen.getByText(/Munich 0 - London 0/i)).toBeInTheDocument()
+test('render game list: with games', () => {
+    const gameService = new GameService()
+    render(<GameListComponent />)
+    expect(screen.getAllByText(/Munich 0 - London 0/i).length).toBe(gameService.get().length)
+})
+
+test('screen game list has create game button', () => {
+    render(<GameListComponent />)
+    expect(screen.getByText(/Create new game/i)).toBeInTheDocument()
+})
+
+test('screen game list has edit score button', () => {
+    const gameService = new GameService()
+    render(<GameListComponent />)
+    expect(screen.getAllByText(/Edit score/i).length).toBe(gameService.get().length)
+})
+
+test('screen game list has finish game button', () => {
+    const gameService = new GameService()
+    render(<GameListComponent />)
+    expect(screen.getAllByText(/Finish game/i).length).toBe(gameService.get().length)
 })

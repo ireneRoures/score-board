@@ -1,9 +1,9 @@
 import React from 'react';
-import { Alert } from "react-bootstrap"
+import { Alert, Button } from "react-bootstrap"
 import { Game } from '../model/Game';
 import { GameService } from '../services/GameService';
 
-export const UserListComponent = () => {
+export const GameListComponent = () => {
 
     const gameService = new GameService
     const games = gameService.get()
@@ -13,7 +13,15 @@ export const UserListComponent = () => {
         return (
             <div>
                 {summary.map((game: Game) => {
-                    return(<div key={game.id}>{game.toString()}</div>)
+                    return(
+                        <div key={game.id}>
+                            <div>{game.toString()}</div>
+                            <div>
+                                <Button>Edit score</Button>
+                                <Button>Finish game</Button>
+                            </div>
+                        </div>
+                    )
                 })}
             </div>
         )
@@ -26,6 +34,7 @@ export const UserListComponent = () => {
             :
                 <div>{renderGames()}</div>
             }
+            <Button>Create new game</Button>
         </div>
     )
 }

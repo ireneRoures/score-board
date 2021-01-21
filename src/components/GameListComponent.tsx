@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Alert, Button } from "react-bootstrap"
 import { Game } from '../model/Game';
 import { GameService } from '../services/GameService';
+import { CreateGameModal } from './CreateGameModal';
 
 export const GameListComponent = () => {
 
     const gameService = new GameService
     const games = gameService.get()
+    const [showCreateModal, setShowCreateModal] = useState(false)
+
+    function onCloseCreateModal() {
+        setShowCreateModal(false)
+    }
+    function onOpenCreateModal() {
+        setShowCreateModal(true)
+    }
 
     function renderGames() {
         const summary = gameService.summary()
@@ -34,7 +43,8 @@ export const GameListComponent = () => {
             :
                 <div>{renderGames()}</div>
             }
-            <Button>Create new game</Button>
+            <Button onClick={onOpenCreateModal}>Create new game</Button>
+            <CreateGameModal show={showCreateModal} onClose={onCloseCreateModal}/>
         </div>
     )
 }

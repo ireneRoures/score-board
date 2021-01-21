@@ -18,7 +18,7 @@ export const GameListComponent = () => {
                             <div>{game.toString()}</div>
                             <div>
                                 <Button>Edit score</Button>
-                                <Button>Finish game</Button>
+                                <Button onClick={() => gameService.finish(game.id)}>Finish game</Button>
                             </div>
                         </div>
                     )

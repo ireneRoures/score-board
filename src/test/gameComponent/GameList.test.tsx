@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import { GameListComponent } from '../../components/GameListComponent'
 import { GameService } from '../../services/GameService';
 
@@ -35,4 +35,11 @@ test('screen game list has finish game button', () => {
     const gameService = new GameService()
     render(<GameListComponent />)
     expect(screen.getAllByText(/Finish game/i).length).toBe(gameService.get().length)
+})
+
+test('screen game list: finish game', () => {
+    const gameService = new GameService()
+    render(<GameListComponent />)
+    fireEvent.click(screen.getAllByText(/Finish game/i)[0])
+    expect(gameService.get().length).toBe(0)
 })

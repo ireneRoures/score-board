@@ -1,4 +1,4 @@
-import { Game } from "../model/game";
+import { Game } from "../model/Game"
 
 let games: Game[]
 export class GameService {

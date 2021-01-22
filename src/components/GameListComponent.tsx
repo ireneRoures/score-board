@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Alert, Button } from "react-bootstrap"
 import { Game } from '../model/Game';
 import { GameService } from '../services/GameService';
@@ -7,14 +7,23 @@ import { CreateGameModal } from './CreateGameModal';
 export const GameListComponent = () => {
 
     const gameService = new GameService
-    const games = gameService.get()
     const [showCreateModal, setShowCreateModal] = useState(false)
+    const [games, setGames] = useState(gameService.get())
 
     function onCloseCreateModal() {
         setShowCreateModal(false)
     }
     function onOpenCreateModal() {
         setShowCreateModal(true)
+    }
+    function onCreateGame(localTeam: string, awayTeam: string) {
+        gameService.add(localTeam, awayTeam)
+        setGames(gameService.get())
+        setShowCreateModal(false)
+    }
+    function onFinishGame(gameId: number) {
+        gameService.finish(gameId)
+        setGames(gameService.get())
     }
 
     function renderGames() {
@@ -27,7 +36,7 @@ export const GameListComponent = () => {
                             <div>{game.toString()}</div>
                             <div>
                                 <Button>Edit score</Button>
-                                <Button onClick={() => gameService.finish(game.id)}>Finish game</Button>
+                                <Button onClick={() => onFinishGame(game.id)}>Finish game</Button>
                             </div>
                         </div>
                     )
@@ -44,7 +53,7 @@ export const GameListComponent = () => {
                 <div>{renderGames()}</div>
             }
             <Button onClick={onOpenCreateModal}>Create new game</Button>
-            <CreateGameModal show={showCreateModal} onClose={onCloseCreateModal}/>
+            <CreateGameModal show={showCreateModal} onClose={onCloseCreateModal} handleSubmit={onCreateGame}/>
         </div>
     )
 }

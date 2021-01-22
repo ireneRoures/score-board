@@ -5,6 +5,7 @@ import { CreateGameForm } from './CreateGameForm';
 interface Props {
     show: boolean
     onClose: () => void
+    handleSubmit: (localTeam: string, awayTeam: string) => void
 }
 
 export const CreateGameModal = (props: Props) => {
@@ -14,7 +15,7 @@ export const CreateGameModal = (props: Props) => {
         <Modal.Header closeButton>
             <Modal.Title>Create game</Modal.Title>
         </Modal.Header>
-        <Modal.Body>HERE</Modal.Body>
+        <Modal.Body><CreateGameForm handleSubmit = {props.handleSubmit}/></Modal.Body>
       </Modal>
     )
 }

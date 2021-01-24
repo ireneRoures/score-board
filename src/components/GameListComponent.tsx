@@ -69,7 +69,11 @@ export const GameListComponent = () => {
                 <div>{renderGames()}</div>
             }
             <Button className="create-game-btn" onClick={onOpenCreateModal}>Create new game</Button>
-            <CreateGameModal show={showCreateModal} onClose={onCloseCreateModal} handleSubmit={onCreateGame}/>
+            <CreateGameModal
+                show={showCreateModal}
+                onClose={onCloseCreateModal}
+                handleSubmit={onCreateGame}
+            />
             <EditScoreGameModal
                 show={showEditScoreModal}
                 onClose={onCloseEditScoreModal}

@@ -48,10 +48,10 @@ export const GameListComponent = () => {
             <div>
                 {summary.map((game: Game) => {
                     return(
-                        <div key={game.id}>
-                            <div>{game.toString()}</div>
+                        <div className='game-list-item' key={game.id}>
+                            <div className='game-txt'>{game.toString()}</div>
                             <div>
-                                <Button>Edit score</Button>
+                                <Button onClick={() => onOpenEditScoreModal(game)}>Edit score</Button>
                                 <Button onClick={() => onFinishGame(game.id)}>Finish game</Button>
                             </div>
                         </div>
@@ -68,7 +68,7 @@ export const GameListComponent = () => {
             :
                 <div>{renderGames()}</div>
             }
-            <Button onClick={onOpenCreateModal}>Create new game</Button>
+            <Button className="create-game-btn" onClick={onOpenCreateModal}>Create new game</Button>
             <CreateGameModal show={showCreateModal} onClose={onCloseCreateModal} handleSubmit={onCreateGame}/>
             <EditScoreGameModal
                 show={showEditScoreModal}

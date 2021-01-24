@@ -18,12 +18,12 @@ export const CreateGameForm = (props: Props) => {
     
     return (
         <Form onSubmit={onSubmit}>
-            <Form.Group controlId="formBasicEmail" onChange={(e: any) => setLocalTeamName(e.target.value)}>
+            <Form.Group controlId="localTeam" onChange={(e: any) => setLocalTeamName(e.target.value)}>
                 <Form.Label>Local team</Form.Label>
                 <Form.Control placeholder="name" required/>
             </Form.Group>
 
-            <Form.Group controlId="formBasicPassword" onChange={(e: any) => setAwayTeamName(e.target.value)}>
+            <Form.Group controlId="awayTeam" onChange={(e: any) => setAwayTeamName(e.target.value)}>
                 <Form.Label>Away team</Form.Label>
                 <Form.Control placeholder="name" required/>
             </Form.Group>

@@ -20,14 +20,14 @@ export const EditScoreGameForm = (props: Props) => {
     
     return (
         <Form onSubmit={onSubmit}>
-            <Form.Group controlId="localScore" onChange={(e: any) => setLocalScore(e.target.value)} defaultValue={props.awayTeamScore}>
+            <Form.Group controlId="localScore" onChange={(e: any) => setLocalScore(e.target.value)}>
                 <Form.Label>Local team</Form.Label>
-                <Form.Control placeholder="score" type="number" required/>
+                <Form.Control placeholder="score" type="number" required value={localScore}/>
             </Form.Group>
 
-            <Form.Group controlId="awayScore" onChange={(e: any) => setAwayScore(e.target.value)} defaultValue={props.awayTeamScore}>
+            <Form.Group controlId="awayScore" onChange={(e: any) => setAwayScore(e.target.value)}>
                 <Form.Label>Away team</Form.Label>
-                <Form.Control placeholder="score" type="number" required/>
+                <Form.Control placeholder="score" type="number" required value={awayScore}/>
             </Form.Group>
             
             <Button variant="primary" type="submit">Change score</Button>
